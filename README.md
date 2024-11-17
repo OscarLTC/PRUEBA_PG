@@ -23,7 +23,7 @@ Este proyecto es una **prueba técnica** para la empresa **Play Group LATAM**. S
 Para clonar el repositorio, ejecuta el siguiente comando:
 
 ```bash
-    git clone
+    git clone https://github.com/OscarLTC/PRUEBA_PG.git
 
 ```
 
