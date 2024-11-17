@@ -99,9 +99,13 @@ Para ejecutar la aplicación backend, sigue estos pasos:
     python manage.py runserver
     ```
 
-7. Abre tu navegador y navega a `http://localhost:8000`
+7. Extra: Si deseas truncar la base de dastos SQLite
 
----
+   ```bash
+    python manage.py truncate_db
+    ```
+
+8. Abre tu navegador y navega a `http://localhost:8000/api`
 
 
 
