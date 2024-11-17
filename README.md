@@ -84,7 +84,7 @@ Para ejecutar la aplicación backend, sigue estos pasos:
 4. Instala las dependencias:
 
    ```bash
-    pip install -r requirements.txt
+    pip install -r .\requirements.py
     ```
 
 5. Realiza las migraciones de la base de datos:
