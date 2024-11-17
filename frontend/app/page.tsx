@@ -20,6 +20,7 @@ export default async function Home() {
         </Link>
       </div>
 
+      {products.length === 0 && <span>Aún no hay productos registrados</span>}
       <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 mt-10">
         {products.map((product: any) => (
           <ProductCard product={product} key={product.id} />

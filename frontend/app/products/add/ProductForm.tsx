@@ -15,7 +15,7 @@ export default function ProductForm({ product }: Props) {
       title: product.title,
       description: product.description,
       price: product.price,
-      image_url: product.image ?? product.image_url,
+      image_url: product.image_url,
     },
   });
   const router = useRouter();
@@ -23,7 +23,7 @@ export default function ProductForm({ product }: Props) {
 
   const onSubmit = handleSubmit(async (data) => {
     if (params?.id) {
-      const res = await updateProduct(params.id, {
+      const res = await updateProduct(Number(params.id), {
         ...data,
         price: data.price,
         image_url: data.image_url,
@@ -31,8 +31,6 @@ export default function ProductForm({ product }: Props) {
     } else {
       await createProduct({
         ...data,
-        price: data.price,
-        image_url: data.image_url,
       });
     }
 
@@ -76,16 +74,30 @@ export default function ProductForm({ product }: Props) {
           {...register("image_url", { required: true })}
         />
         {params.id && (
-          <img
-            src={product.image}
-            className="w-20 h-20 object-cover rounded-md mt-2"
-          />
+          <>
+            <img
+              src={product.image_url}
+              className="w-20 h-20 object-cover rounded-md mt-2"
+            />
+            <span>Imagen previa *</span>
+          </>
         )}
       </div>
 
-      <button className="bg-zinc-500 text-white rounded-md p-2" type="submit">
-        {params.id ? "Actualizar" : "Crear"}
-      </button>
+      <div className="flex gap-3 justify-between">
+        <button
+          className="bg-red-400 text-white rounded-md p-2 mr-2 w-full "
+          onClick={() => router.back()}
+        >
+          Cancelar
+        </button>
+        <button
+          className="bg-green-400 text-white rounded-md p-2 w-full"
+          type="submit"
+        >
+          {params.id ? "Actualizar" : "Crear"}
+        </button>
+      </div>
     </form>
   );
 }

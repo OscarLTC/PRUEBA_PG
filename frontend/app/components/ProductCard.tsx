@@ -5,6 +5,7 @@ import { Product } from "../models/product.model";
 import { IoCartOutline } from "react-icons/io5";
 import { deleteProduct } from "../products/products.services";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface Props {
   product: Product;
@@ -13,8 +14,8 @@ interface Props {
 export const ProductCard = ({ product }: Props) => {
   const router = useRouter();
 
-  async function handleRemoveProduct(id: string) {
-    await deleteProduct(id);
+  async function onRemoveProduct() {
+    await deleteProduct(product.id);
     router.refresh();
   }
 
@@ -24,7 +25,6 @@ export const ProductCard = ({ product }: Props) => {
       <div className="w-full ">
         <Image
           src={
-            product.image ??
             product.image_url ??
             "https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg"
           }
@@ -37,18 +37,21 @@ export const ProductCard = ({ product }: Props) => {
       </div>
       <span className="font-bold mt-10">Precio: S/{product.price}</span>
       <div className="flex items-center justify-between text-zinc-900 gap-4">
-        <div className="bg-white flex rounded-lg p-2 items-center font-bold gap-2">
+        <div className="bg-white opacity-50 cursor-not-allowed select-none flex rounded-lg p-2 items-center font-bold gap-2">
           <IoCartOutline />
-          <button>Agregar al carrito</button>
+          <span>Agregar al carrito</span>
         </div>
         <div className="flex gap-2 ">
-          <div className="bg-white p-2 rounded-lg">
+          <Link
+            href={`/products/${product.id}/edit`}
+            className="bg-white p-2 rounded-lg"
+          >
             <FaPencilAlt />
-          </div>
+          </Link>
 
-          <div className="bg-white p-2 rounded-lg">
+          <button onClick={onRemoveProduct} className="bg-white p-2 rounded-lg">
             <FaRegTrashAlt />
-          </div>
+          </button>
         </div>
       </div>
     </div>
