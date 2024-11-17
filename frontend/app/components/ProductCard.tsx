@@ -1,13 +1,23 @@
+"use client";
 import Image from "next/image";
 import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
 import { Product } from "../models/product.model";
 import { IoCartOutline } from "react-icons/io5";
+import { deleteProduct } from "../products/products.services";
+import { useRouter } from "next/navigation";
 
 interface Props {
   product: Product;
 }
 
 export const ProductCard = ({ product }: Props) => {
+  const router = useRouter();
+
+  async function handleRemoveProduct(id: string) {
+    await deleteProduct(id);
+    router.refresh();
+  }
+
   return (
     <div className="p-6 rounded-lg flex flex-col gap-4 bg-zinc-900">
       <h3 className="font-bold text-3xl">{product.title}</h3>
